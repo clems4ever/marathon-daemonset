@@ -18,6 +18,8 @@ type Config struct {
 	UpdateFrequency time.Duration `default:"5m0s"`
 	DryRun          bool          `default:"false"`
 	Debug           bool          `default:"false"`
+  SkipTls         bool          `default:"true"`
+  Authorization   string        `default:""`
 }
 
 // ConfigHost represents a host String.
@@ -41,6 +43,7 @@ func (ch *ConfigHost) Decode(value string) error {
 
 func init() {
 	err := envconfig.Process("daemonset", &config)
+  fmt.Print(config)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
